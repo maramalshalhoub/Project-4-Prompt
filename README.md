@@ -91,4 +91,4 @@ By the time you submit this project, you will have covered new ground in, and re
 - **[Rails JSON API Docs](https://guides.rubyonrails.org/api_app.html)**
 - **[Heroku Deployment Rails](https://devcenter.heroku.com/articles/getting-started-with-rails5)**
 - **[React.js](https://reactjs.org/)**
-- **[React Deployment Guide](https://github.com/gitname/react-gh-pages)
+- **[React Deployment Guide](https://github.com/gitname/react-gh-pages)**
