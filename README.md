@@ -66,7 +66,7 @@ By the time you submit this project, you will have covered new ground in, and re
 - Use 3rd party API with [httparty](https://github.com/jnunemaker/httparty)
 
 ### Necessary Deliverables
-- Projects are due Thursday, 4/4 at 9am!  Submissions will be submitted via a google sheet before presentations start.
+- Projects are due Thursday, 5/16 at 10am!  Submissions will be submitted via a google sheet before presentations start.
 - A **10 minute presentation** in which you answer the following questions:
   - What is the application about?
   - Is there any information you think might help us understand what you built?
