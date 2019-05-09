@@ -1,0 +1,37 @@
+{
+  "name": "project-4-prompt",
+  "version": "1.0.0",
+  "description": "# Project #4: Full Stack Application with React Front End and JSON API",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.16.1",
+    "formidable": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.6",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "concurrently \" npm test\" \"npm run opportunity\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maramalshalhoub/Project-4-Prompt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maramalshalhoub/Project-4-Prompt/issues"
+  },
+  "homepage": "https://github.com/maramalshalhoub/Project-4-Prompt#readme"
+}
