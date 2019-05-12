@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const User = require('../models/user')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const passportJWT = require('passport-jwt');
@@ -6,9 +6,8 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 
-
-// const Job = require('../models/Job')
-// const Client = require('../models/Client')
+const Job = require('../models/Job')
+const Client = require('../models/Client')
 
 passport.use(new LocalStrategy({
     usernameField: 'email',

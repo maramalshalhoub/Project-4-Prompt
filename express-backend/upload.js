@@ -8,13 +8,15 @@ module.exports = function upload(req, res) {
   form.on('file', (field, file) => {
     console.log(file);
     
-    let newUser = new User()
+    // let newUser = new User()
 
-    User.find()
+    User.findByIdAndUpdate("5cd7e853a5c7e497fc63edbf", { resume: file.path }, {new: true})
     .then(user =>{
-      newUser.resume = file.path
-      console.log( newUser.resume);
-      newUser.save();
+      console.log(user);
+      
+      // user.resume = file.path
+      // console.log( user.resume);
+      // user.save();
     })
     .catch(err =>{
       console.log(err);

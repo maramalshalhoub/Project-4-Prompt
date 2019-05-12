@@ -44,10 +44,10 @@ class App extends Component {
         data.user = response.data.user
         data.isAuthenticated = true
         data.hasError = false
-
+        
         this.setState(data)
 
-        this.getGames()
+        // this.getGames()
       }
       
     })

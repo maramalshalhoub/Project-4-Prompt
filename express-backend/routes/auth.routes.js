@@ -1,10 +1,10 @@
-// const User = require('../models/User');
+const User = require('../models/user')
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-// const passportHelper = require('../config/passport')
+const passportHelper = require('../config/passport')
 
 
 router.get('/', (request, response, next) => {
@@ -39,14 +39,15 @@ router.post('/register', (request, response)=>{
   }
   
   let user = new User(data)
-  
   user.save()
+
   .then(()=> {
     response.status(200).json({ message : "Registered Successfully" })
   })
   .catch(err =>{
     response.status(401).json({ message : "You are not Allowed to Register"})
   })
+  
 
 })
 

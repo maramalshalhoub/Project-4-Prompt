@@ -36,8 +36,8 @@ server.use(passport.initialize())
 server.use(passport.session())
 
 //routes
-server.use('/api/auth', require('./routes/auth.routes'))
-server.use('/api/user', require('./routes/user.routes'))
+server.use('/api/auth', require('../express-backend/routes/auth.routes'))
+server.use('/api/user', require('../express-backend/routes/user.routes'))
 
 //cannot find route
 server.use('*', (request, response) => {
