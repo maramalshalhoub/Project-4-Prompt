@@ -4,6 +4,12 @@ const server = express()
 const cors = require('cors')
 const upload = require('./upload')
 
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+}
+server.use(cors())
+
 const session = require('express-session')
 //jwt and passports
 const jwt = require('jsonwebtoken')
@@ -22,13 +28,6 @@ server.use(session({
  saveUninitialized : true
 }))
 
-
-var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200,
-  }
-server.use(cors(corsOptions))
-
 server.post('/upload', upload)
 
 
@@ -36,8 +35,8 @@ server.use(passport.initialize())
 server.use(passport.session())
 
 //routes
-server.use('/api/auth', require('../express-backend/routes/auth.routes'))
-server.use('/api/user', require('../express-backend/routes/user.routes'))
+server.use('/api/auth', require('./routes/auth.routes'))
+server.use('/api/user', require('./routes/user.routes'))
 
 //cannot find route
 server.use('*', (request, response) => {

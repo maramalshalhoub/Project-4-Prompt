@@ -28,6 +28,7 @@ router.get('/', (request, response, next) => {
 })
 
 router.post('/register', (request, response)=>{
+  console.log("register route")
 
   let data = {
     name : request.body.name ,
@@ -39,9 +40,12 @@ router.post('/register', (request, response)=>{
   }
   
   let user = new User(data)
+  console.log(user)
   user.save()
 
-  .then(()=> {
+  .then((user)=> {
+    console.log(user, "line 47")
+
     response.status(200).json({ message : "Registered Successfully" })
   })
   .catch(err =>{

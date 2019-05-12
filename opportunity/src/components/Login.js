@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Col, FormGroup, Label, Button} from 'reactstrap'
-
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 const Login = (props) => {
   return (
     <>
@@ -14,6 +14,11 @@ const Login = (props) => {
           <Input name="password" type="password" onChange={props.change} />
       </FormGroup>
       <Button onClick={props.login} color="primary" size="lg" block> Login </Button>
+    
+     <Router>
+       <Link to="/components/Register">Register</Link>
+     </Router>
+     
      </Col>
     </>
   )
