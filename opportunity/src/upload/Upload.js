@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Upload.css'
 import Dropzone from '../dropzone/Dropzone'
+import Progress from '../progress/Progress'
 class Upload extends Component {
     constructor(props) {
         super(props);
@@ -80,17 +81,7 @@ class Upload extends Component {
           this.setState({ successfullUploaded: true, uploading: false });
         }
       }
-      sendRequest(file) {
-  return new Promise((resolve, reject) => {
-    const req = new XMLHttpRequest();
-
-    const formData = new FormData();
-    formData.append("file", file, file.name);
-
-    req.open("POST", "http://localhost:8000/upload");
-    req.send(formData);
-  });
-}
+      
 sendRequest(file) {
     return new Promise((resolve, reject) => {
      const req = new XMLHttpRequest();
@@ -123,7 +114,7 @@ sendRequest(file) {
      const formData = new FormData();
      formData.append("file", file, file.name);
    
-     req.open("POST", "http://localhost:8000/upload");
+     req.open("POST", "http://localhost:5000/upload");
      req.send(formData);
     });
    }
@@ -144,7 +135,7 @@ sendRequest(file) {
                 return (
                     <div key={file.name} className="Row">
                     <span className="Filename">{file.name}</span>
-                    // Add this:
+                   
                     {this.renderProgress(file)}
                     </div>
                 );

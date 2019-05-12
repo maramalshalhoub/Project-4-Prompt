@@ -1,3 +1,4 @@
+const User = require('../models/User')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const passportJWT = require('passport-jwt');
@@ -5,7 +6,9 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 
-const User = require('../models/User')
+
+// const Job = require('../models/Job')
+// const Client = require('../models/Client')
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -65,3 +68,5 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
+
+module.exports = passport

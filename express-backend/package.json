@@ -22,7 +22,8 @@
   "scripts": {
     "test": "nodemon server.js",
     "start": "node server.js",
-    "dev": "concurrently \" npm test\" \"npm run opportunity\""
+    "client": "cd .. && cd opportunity && npm start",
+    "dev": "concurrently \" npm test\" \"npm run client\""
   },
   "repository": {
     "type": "git",
