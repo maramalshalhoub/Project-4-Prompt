@@ -24,7 +24,7 @@ passport.use(new LocalStrategy({
         return done(err);
       }
       if (!user) {
-        return done(null, false, { message : "User does not exist" });
+        return done(null, false, { message : "User doesnt exist" });
       }
 
       user.verifyPassword(password, user.password, (err, match)=>{
@@ -52,7 +52,8 @@ function (jwtPayload, done) {
       return done(null, user);
     })
     .catch(err => {
-      return done(err);
+      console.log(err)
+      return done(err,{ message : "not working"});
     });
 }
 ));

@@ -21,6 +21,10 @@ const Register = (props) => {
           <Label for="exampleSkills" sm={2}>skills</Label>
           <Input name="skills" type="skills" onChange={props.change} />
       </FormGroup>
+      {/* <FormGroup>
+          <Label for="exampleResume" sm={2}>Resume</Label>
+          <Input name="resume" type="resume" onChange={props.change} />
+      </FormGroup> */}
       <FormGroup>
           <Label for="examplePassword" sm={2}>Password</Label>
           <Input name="password" type="password" onChange={props.change} />

@@ -8,7 +8,7 @@ var corsOptions = {
   origin: '*',
   optionsSuccessStatus: 200,
 }
-server.use(cors())
+server.use(cors(corsOptions))
 
 const session = require('express-session')
 //jwt and passports

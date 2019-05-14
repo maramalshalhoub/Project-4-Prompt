@@ -28,7 +28,7 @@ router.get('/', (request, response, next) => {
 })
 
 router.post('/register', (request, response)=>{
-  console.log("register route")
+  // console.log("register route")
 
   let data = {
     name : request.body.name ,
@@ -38,9 +38,10 @@ router.post('/register', (request, response)=>{
     resume : request.body.resume,
     password: request.body.password 
   }
+  console.log(request.body);
   
   let user = new User(data)
-  console.log(user)
+  // console.log(user)
   user.save()
 
   .then((user)=> {
@@ -49,6 +50,7 @@ router.post('/register', (request, response)=>{
     response.status(200).json({ message : "Registered Successfully" })
   })
   .catch(err =>{
+    console.log(err)
     response.status(401).json({ message : "You are not Allowed to Register"})
   })
   
