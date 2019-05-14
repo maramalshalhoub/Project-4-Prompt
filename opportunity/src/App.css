@@ -341,3 +341,9 @@ footer{
 	left: 0;
 	right: 0;
 }
+.fc-button-primary{
+  background-color: rgba(103, 58, 183, 1);
+}
+.fc-prev-button fc-button fc-button-primary{
+  background-color: rgba(103, 58, 183, 1);
+}

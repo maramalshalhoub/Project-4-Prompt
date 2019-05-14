@@ -116,8 +116,7 @@ class App extends Component {
       // }
     })
     .catch((ee) => {
-      console.log(ee)
-      console.log("line 109")
+      console.log(ee);
     })
   }
 
@@ -153,21 +152,8 @@ class App extends Component {
 
 render(){
   
-  // const showLogin = (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} {...props} /> : <Redirect to="./upload/Upload"/> )} />
 
   const Logout = (this.state.isAuthenticated) ? <Button onClick={this.logout}>Logout</Button> : null
-
-  // const GameView = (this.state.isAuthenticated) ? <Row>
-  //                                                   <Col md={6}>
-  //                                                     <ShowGame games={this.state.games} />
-  //                                                   </Col>
-
-  //                                                   <Col md={6}>
-  //                                                     <AddGame add={this.submitHandler} change={this.changeHandler} />
-  //                                                   </Col>
-                                                    
-  //                                                 </Row> : null
-   
 
   console.log(this.state)
   return (

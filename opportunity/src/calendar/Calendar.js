@@ -43,7 +43,8 @@ class Calendars extends Component {
                 id: 'a',
                 title: 'my event',
                 start: '2019-05-14',
-                end: '2019-05-17'
+                end: '2019-05-17',
+                backgroundColor:'rgba(103, 58, 183, 1)'
               }]
         });
         
