@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import './App.css';
 import Upload from './upload/Upload';
 import axios from 'axios';
@@ -6,12 +7,20 @@ import { getToken, setToken, logout} from './services/auth';
 import Login from './components/Login';
 import Register from './components/Register';
 import { Redirect, BrowserRouter as Router, Route,Link } from 'react-router-dom';
-import {Container, Button, Alert} from 'reactstrap';
+import {Container, Row, Button, Col, Alert} from 'reactstrap';
 import Calendar from './calendar/Calendar'
 import Navigation from './Navigation'
 import Apply from './Apply'
 import Contact from './Contact';
- 
+import ShowJob from './components/ShowJob';
+import AddJob from './components/AddJob';
+
+let header = {
+  headers :{
+    "Content-Type" : "application/json",
+    "Authorization" : `Bearer ${getToken()}`
+  }
+}
 class App extends Component {
 
   state = {
@@ -25,7 +34,8 @@ class App extends Component {
     category_field : "",
     skills : "",
     resume : "",
-    password : ""
+    password : "",
+    jobs: []
   }
 
   changeHandler = (e) => {
@@ -34,20 +44,42 @@ class App extends Component {
     this.setState(data)
   }
 
-  // submitHandler = (e) => {   
-  //   axios.post('/api/games',{ name : this.state.gamename}, header)
-  //     .then( response => {
-        
-  //         let data = {...this.state}
-  //         data.games.push(response.data.game)
+  getJobs = () =>{
+    axios.get('/api/jobs', header)
+    .then(response => {
+      console.log(response.data)
+      if(response.data.jobs.length > 0){
 
-  //         this.setState(data)
-  //     })
-  //     .catch()
-  // }
+        let data = {...this.state}
+        data.jobs = response.data.jobs
+
+        this.setState(data)
+      }
+    })
+    .catch()
+  }
+
+  submitHandler = (e) => {   
+    axios.post('http://localhost:5000/api/job',
+    { name : this.state.jobname, 
+      category_field : this.state.category_field,
+      skills : this.state.skills,
+      start : this.state.start,
+      end : this.state.end,
+      backgroundColor: ''
+    }, header)
+      .then( response => {
+        console.log(response)
+        alert('Job Posted Successfully')
+          let data = {...this.state}
+          data.jobs.push(response.data.job)
+          this.setState(data)
+          window.location.href = "http://localhost:3000/calendar"
+      })
+      .catch(err => console.log(err))
+  }
 
   loginHandler = (e) => {
-    // console.log("ok")
     axios.post('http://localhost:5000/api/auth/login',{ email: this.state.email, password: this.state.password})
     .then( response => {
       console.log(response.data)
@@ -82,18 +114,14 @@ class App extends Component {
     this.setState(data)
   }
 
-  // registerHandler = (e) => {
-  //   axios.post('/api/auth/',{})
-  //   .then( response => {
-  
-  //   })
-  //   .catch()
-  // }
- 
-  registerHandler = (e) => {
-    // console.log("state");
-    // console.log(this.state);
+  displayJobs = ()=>{
     
+    return this.state.jobs.map(job => 
+      <li key={job._id} id={job._id}>{job.name}</li>
+      )
+  }
+ 
+  registerHandler = (e) => { 
     axios.post('http://localhost:5000/api/auth/register',
 
     {name: this.state.name, email: this.state.email, category_field: this.state.category_field, skills: this.state.skills, resume: this.state.resume, password: this.state.password}
@@ -118,42 +146,24 @@ class App extends Component {
     .catch((ee) => {
       console.log(ee);
     })
+
   }
 
- 
-//   render(){
-//     //<Router><Redirect to="/upload/Upload" /></Router>
-//     // console.log(this.state.isAuthenticated)
-//     const showLogin = (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} {...props} /> : <Redirect to="./upload/Upload"/> )} />
-
-//     const Logout = (this.state.isAuthenticated) ? <Button onClick={this.logout}>Logout</Button> : null
-//     const register= (this.state.isAuthenticated)=true ?<Register change={this.changeHandler} register={this.registerHandler} /> : null
-  
-//     return (
-//       <div className="App">
-//         <Container>
-//           <Alert color="danger" isOpen={this.state.hasError} toggle={this.onDismiss} fade={false}>{this.state.errorMsg}</Alert>
-//           {/* {register} */}
-//           {/* {Logout} */}
-//           {showLogin}
-//           {/* <Login change={this.changeHandler} login={this.loginHandler} />  */}
-//         </Container>
-// {/* 
-//         <div className="Card">
-//             <Upload />
-//         </div> */}
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
 
 render(){
+  const Logout = (this.state.isAuthenticated) ? <Button className="poster" onClick={this.logout}><a href="/">Logout</a> </Button> : null
+  const up = (this.state.isAuthenticated) ? <Button className="poster">Upload</Button> :null
+  const post= (this.state.isAuthenticated) ?<Button className="poster">Post Job</Button>:null
   
+  const JobView = (this.state.isAuthenticated) ? <Row>
+  <Col md={6}>
+    <ShowJob jobs={this.state.jobs} />
+  </Col>
 
-  const Logout = (this.state.isAuthenticated) ? <Button onClick={this.logout}>Logout</Button> : null
+  <Col md={6}>
+    <AddJob add={this.submitHandler} change={this.changeHandler} />
+  </Col>
+</Row> : null
 
   console.log(this.state)
   return (
@@ -165,21 +175,26 @@ render(){
             <li><Link to="/apply">Apply</Link></li>
             <li><Link to="/calendar">Calendar</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
+            <Link to="/" className="poster">{Logout}</Link>
+            <Link to="/upload" className="poster" >{up}</Link>
+            <Link to="/postjob" className="poster">{post}</Link>
+          
         </ul>       
       </header>
 
     <Container>
       <Alert color="danger" isOpen={this.state.hasError} toggle={this.onDismiss} fade={false}>{this.state.errorMsg}</Alert>
 
-      <Route exact path="/"  render={(props => (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} {...props} /> : <Redirect to="./upload"/> )} />
-
+        <Route exact path="/"  render={(props => (!this.state.isAuthenticated) ? <Login change={this.changeHandler} login={this.loginHandler} {...props} /> : <Redirect to="./calendar"/> )} />
         <Route exact path="/apply" component={Apply}/>
         <Route exact path="/calendar" component={Calendar}/>
         <Route exact path="/contact" component={Contact}/>
         <Route exact path="/upload" component={Upload}/>
+        <Route exact path="/postjob" render={props => <AddJob {...props}  change={this.changeHandler} add={this.submitHandler} />} />
         <Route exact path="/register"  render={(props => (!this.state.isAuthenticated || !this.state.isRegistered) ? <Register change={this.changeHandler} register={this.registerHandler} {...props} /> : <Redirect to="/login"/> )} />
 
-      {Logout}
+      {/* {Logout} */}
+      {/* {JobView} */}
       {/* {register} */}
       {/* {showLogin} */}
       
@@ -190,11 +205,12 @@ render(){
       {/* <Calendar />
      <Apply /> */}
     <footer>
-                <br/>
+               
                 <p>@2019 Enhance Success. <br/> All Rights Reserved.</p>
     </footer>
     </div>
     </Router>
+    
   );
 }
 }

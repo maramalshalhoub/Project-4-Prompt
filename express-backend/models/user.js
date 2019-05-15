@@ -13,14 +13,7 @@ const userSchema = new Schema({
  password : { type: String},
 },{timestamps : true})
 
-// const userSchema = new Schema({
-//   name: { type: String, required: true, unique : true},
-//   email : { type: String, required: true, unique : true},
-//   category_field:{ type: String, required: true},
-//   skills:{ type: String, required: true},
-//   resume:{ type: String, required: true},
-//   password : { type: String, required: true}
-//  },{timestamps : true})
+
  
 userSchema.pre('save',function(next){
     let user = this

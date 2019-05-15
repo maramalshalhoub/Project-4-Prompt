@@ -30,6 +30,7 @@ const Register = (props) => {
           <Input name="password" type="password" onChange={props.change} />
       </FormGroup>
       <Button onClick={props.register} color="primary" size="lg" block> Register </Button>
+      <a className= "register" href="/">AlReady Registered? Login</a>
      </Col>
     </>
   )

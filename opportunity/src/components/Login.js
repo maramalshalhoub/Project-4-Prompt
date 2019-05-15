@@ -2,6 +2,7 @@ import React from 'react';
 import { Input, Col, FormGroup, Label, Button} from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Register from './Register';
+import '../App.css'
 
 const Login = (props) => {
   return (
@@ -16,10 +17,9 @@ const Login = (props) => {
           <Input name="password" type="password" onChange={props.change} />
       </FormGroup>
       <Button onClick={props.login} color="primary" size="lg" block> Login </Button>
-      <Router>
-        <Route path="/register" component={Register}/>
-        <Link to="Register">Register</Link>
-      </Router>
+     
+        <a className= "register" href="/register">Don't have an Account? Register</a>
+     
      </Col>
     </>
   )
