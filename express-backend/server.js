@@ -37,7 +37,7 @@ server.use(passport.session())
 //routes
 server.use('/api/auth', require('./routes/auth.routes'))
 server.use('/api/user', require('./routes/user.routes'))
-server.use('/api/job', passport.authenticate('jwt', {session: false}), require('./routes/job.routes'))
+server.use('/api/job', require('./routes/job.routes'))
 
 //cannot find route
 server.use('*', (request, response) => {

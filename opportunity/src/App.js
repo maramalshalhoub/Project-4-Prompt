@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import './App.css';
 import Upload from './upload/Upload';
 import axios from 'axios';
@@ -21,21 +20,27 @@ let header = {
     "Authorization" : `Bearer ${getToken()}`
   }
 }
-class App extends Component {
 
+class App extends Component {
   state = {
     user : "",
     errorMsg : '',
     isRegistered: false,
     isAuthenticated : false,
     hasError : false,
+    editid:'',
     name : "",
     email : "",
     category_field : "",
     skills : "",
     resume : "",
     password : "",
-    jobs: []
+    jobs: [] 
+  }
+
+  componentDidMount() {
+    return this.getJobs()
+
   }
 
   changeHandler = (e) => {
@@ -45,11 +50,10 @@ class App extends Component {
   }
 
   getJobs = () =>{
-    axios.get('/api/jobs', header)
+    axios.get('http://localhost:5000/api/job', header)
     .then(response => {
       console.log(response.data)
       if(response.data.jobs.length > 0){
-
         let data = {...this.state}
         data.jobs = response.data.jobs
 
@@ -90,16 +94,13 @@ class App extends Component {
         data.user = response.data.user
         data.isAuthenticated = true
         data.hasError = false
-        
         this.setState(data)
       }
-      
     })
     .catch(err =>{
       let data = {...this.state}
         data.hasError = true
         this.setState(data)
-
     })
   }
 
@@ -110,24 +111,21 @@ class App extends Component {
     data.user = ""
     data.email = ""
     data.password = ""
-    
     this.setState(data)
   }
 
   displayJobs = ()=>{
-    
     return this.state.jobs.map(job => 
       <li key={job._id} id={job._id}>{job.name}</li>
       )
   }
+
  
   registerHandler = (e) => { 
     axios.post('http://localhost:5000/api/auth/register',
-
     {name: this.state.name, email: this.state.email, category_field: this.state.category_field, skills: this.state.skills, resume: this.state.resume, password: this.state.password}
     )
     .then( response => {
-      console.log("line 95")
       console.log(response)
       // if(response.data.token){
         // setToken(response.data.token)
@@ -140,7 +138,6 @@ class App extends Component {
         
         this.setState(data)
         window.location.href = "http://localhost:3000/login"
-        
       // }
     })
     .catch((ee) => {
@@ -154,6 +151,7 @@ render(){
   const Logout = (this.state.isAuthenticated) ? <Button className="poster" onClick={this.logout}><a href="/">Logout</a> </Button> : null
   const up = (this.state.isAuthenticated) ? <Button className="poster">Upload</Button> :null
   const post= (this.state.isAuthenticated) ?<Button className="poster">Post Job</Button>:null
+  const show= (this.state.isAuthenticated) ?<Button className="show">Show Job</Button>:null
   
   const JobView = (this.state.isAuthenticated) ? <Row>
   <Col md={6}>
@@ -192,6 +190,8 @@ render(){
         <Route exact path="/upload" component={Upload}/>
         <Route exact path="/postjob" render={props => <AddJob {...props}  change={this.changeHandler} add={this.submitHandler} />} />
         <Route exact path="/register"  render={(props => (!this.state.isAuthenticated || !this.state.isRegistered) ? <Register change={this.changeHandler} register={this.registerHandler} {...props} /> : <Redirect to="/login"/> )} />
+        {/* <Route exact path="/showjob"  component={ShowJob}/> */}
+        <Route exact path="/showjob" render={(props) => <ShowJob {...props} jobs={this.state.jobs}  getcase={this.getJobs}   />} />
 
       {/* {Logout} */}
       {/* {JobView} */}

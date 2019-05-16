@@ -5,6 +5,8 @@ const Register = (props) => {
   return (
     <>
     <Col sm={3} md={4} className="mx-auto">
+    <br/>
+    <br/>
      <FormGroup>
           <Label for="exampleName" sm={2}>name</Label>
         <Input name="name" onChange={props.change} />

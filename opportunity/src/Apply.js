@@ -24,12 +24,18 @@ constructor(props, context) {
 
     let carousels = data.properties.map((item, index)=>{
         return (
-            <Carousel.Item key={index}>
+            <Carousel.Item key={index} >
+            <br />
+            <br />
+            <br />
+             <a href="/showjob"><button className="Info"  onClick={this.state.jobs}><b>Apply</b></button>
+             </a> 
               <img
               className="d-block w-100"
               src={item.picture}
               alt="test"
               />
+               {/* <a class="btn btn-primary"  href="/showjob" onClick={this.state.jobs}>Apply</a> */}
             </Carousel.Item>
         )   
 })

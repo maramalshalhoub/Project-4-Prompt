@@ -1,19 +1,32 @@
-import React from 'react'
-import {ListGroup, ListGroupItem, ListGroupItemText} from 'reactstrap'
+import React, { Component } from 'react'
+import {Card, CardBody, Row } from 'reactstrap'
 
-const ShowJob = (props) => {
-  return (
-   <ListGroup>
-    { props.games.map(game => 
-      <ListGroupItem key={game._id} id={game._id}>
-        <ListGroupItemText>
-         {game.name}
-        </ListGroupItemText>
-      </ListGroupItem>
-     )}
+class ShowJob extends Component  {
+  render(){
+    console.log(this.props.jobs);
     
- </ListGroup>
+  const user = this.props.jobs 
+  return (
+    <div className="container-fluid">
+     <br/>
+        <br/>
+   <Row className="space" >
+    { user.map((cas) => 
+     <Card  id={cas._id} style={{ width: '18rem'}} >
+      <CardBody >
+       
+        <p className="h5" >{cas.name}</p>
+        <hr/>
+        <p className="h6" >Job Field:{cas.category_field}</p>
+        <p className="h6">Job Description:{cas.description}</p>
+        <p className="h6" >Job Start Date:{cas.start}</p>
+        <p className="h6" >Job End Date:{cas.end}</p>
+    
+      </CardBody>
+      </Card>
+     )}
+ </Row>
+ </div>
   )
-}
-
-export default ShowJob
+}}
+  export default ShowJob

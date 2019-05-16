@@ -4,13 +4,14 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const userSchema = new Schema({
- userType: {type: Boolean},
+ userType: {type: Boolean, default: false},
  name: { type: String},
  email : { type: String},
  category_field:{ type: String},
  skills:{ type: String},
- resume:{ type: String},
+ resume:{ type: String, default:"null"},
  password : { type: String},
+ job : [{ type: Schema.Types.ObjectId, ref : 'Job'}]
 },{timestamps : true})
 
 

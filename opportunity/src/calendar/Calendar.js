@@ -9,23 +9,21 @@ import '@fullcalendar/timegrid/main.css';
 import '@fullcalendar/list/main.css';
 import '../Calendar.css'
 import axios from 'axios';
-// import getToken from '../services/auth';
+import {getToken} from '../services/auth';
 
-// let header = {
-//     headers :{
-//       "Content-Type" : "application/json",
-//       "Authorization" : `Bearer ${getToken()}`
-//     }
-//   }
+let header = {
+    headers :{
+      "Content-Type" : "application/json",
+      "Authorization" : `Bearer ${getToken()}`
+    }
+  }
 
 class Calendars extends Component {
-
     constructor(props){
         super(props)
         this.state ={
             events : [],
             jobs: []
-            
         }
     }
     
@@ -53,9 +51,6 @@ class Calendars extends Component {
             defaultView: 'dayGridMonth',
             events: this.state.events
         });
-       
-
-
         calendar.render();
     }
 

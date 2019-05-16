@@ -8,6 +8,8 @@ const Login = (props) => {
   return (
     <>
     <Col sm={3} md={4} className="mx-auto">
+    <br/>
+    <br/>
       <FormGroup>
           <Label for="exampleEmail" sm={2}>Email</Label>
           <Input name="email" onChange={props.change} />

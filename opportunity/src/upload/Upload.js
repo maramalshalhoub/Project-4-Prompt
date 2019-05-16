@@ -59,13 +59,16 @@ class Upload extends Component {
             </button>
           );
         } else {
+          
           return (
             <button
               disabled={this.state.files.length < 0 || this.state.uploading}
-              onClick={this.uploadFiles}
+              onClick={this.uploadFiles}  
             >
               Upload
             </button>
+
+             
           );
         }
       }
@@ -78,12 +81,13 @@ class Upload extends Component {
         });
         try {
           await Promise.all(promises);
-      
           this.setState({ successfullUploaded: true, uploading: false });
         } catch (e) {
           // Not Production ready! Do some error handling here instead...
           this.setState({ successfullUploaded: true, uploading: false });
         }
+        alert("Uploaded Successfully")
+        window.location.href = "http://localhost:3000/calendar"
       }
       
 sendRequest(file) {
@@ -121,6 +125,7 @@ sendRequest(file) {
    
      req.open("POST", "http://localhost:5000/upload?user="+ this.state.user._id);
      req.send(formData);
+
     });
    }
 

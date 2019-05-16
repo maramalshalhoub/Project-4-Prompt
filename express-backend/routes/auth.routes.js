@@ -36,7 +36,8 @@ router.post('/register', (request, response)=>{
     category_field : request.body.category_field,
     skills : request.body.skills,
     resume : request.body.resume,
-    password: request.body.password 
+    password: request.body.password,
+    userType: request.body.userType
   }
   console.log(request.body);
   

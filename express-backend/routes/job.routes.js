@@ -14,7 +14,6 @@ router.get('/', (request, response)=>{
   .catch(err => {
    response.send({ message : err})
   })
-  
 })
 
 
@@ -30,7 +29,6 @@ router.post('/', (request, response)=>{
   }
 
   let job = new Job(data)
-
   job.save()
   .then((j)=> {
    console.log(j)
